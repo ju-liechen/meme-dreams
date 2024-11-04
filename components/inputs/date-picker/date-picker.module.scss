@@ -1,0 +1,111 @@
+/* =============================================================================
+Component - Date Picker
+============================================================================= */
+@import 'styles/base/variables.scss';
+.date {
+  :global(.react-datepicker-wrapper) {
+    width: 100%;
+  }
+
+  :global(.react-datepicker__close-icon:after) {
+    background-color: transparent;
+    color: $text-color;
+    font-size: 1rem;
+    width: 1.25rem;
+    height: 1.25rem;
+    font-size: 1rem;
+  }
+}
+
+.portal {
+  :global(.react-datepicker-popper) {
+    z-index: 999;
+  }
+
+  :global(.react-datepicker) {
+    border-color: $neutral-color;
+    box-shadow: $box-shadow-light;
+  }
+
+  :global(.react-datepicker__header) {
+    background: #f8f8f8;
+    border-width: 0;
+  }
+
+  :global(.react-datepicker__day--keyboard-selected:hover),
+  :global(.react-datepicker__month-text--keyboard-selected:hover),
+  :global(.react-datepicker__quarter-text--keyboard-selected:hover),
+  :global(.react-datepicker__year-text--keyboard-selected:hover) {
+    background-color: $neutral-color;
+    color: $neutral-color;
+  }
+
+  :global(.react-datepicker__day:hover),
+  :global(.react-datepicker__month-text:hover),
+  :global(.react-datepicker__quarter-text:hover),
+  :global(.react-datepicker__year-text:hover) {
+    background-color: $neutral-color;
+    color: $text-color;
+  }
+
+  :global(.react-datepicker__day--keyboard-selected),
+  :global(.react-datepicker__month-text--keyboard-selected),
+  :global(.react-datepicker__quarter-text--keyboard-selected),
+  :global(.react-datepicker__year-text--keyboard-selected) {
+    background-color: $neutral-color;
+  }
+
+  :global(.react-datepicker__day--selected),
+  :global(.react-datepicker__day--in-selecting-range),
+  :global(.react-datepicker__day--in-range),
+  :global(.react-datepicker__month-text--selected),
+  :global(.react-datepicker__month-text--in-selecting-range),
+  :global(.react-datepicker__month-text--in-range),
+  :global(.react-datepicker__quarter-text--selected),
+  :global(.react-datepicker__quarter-text--in-selecting-range),
+  :global(.react-datepicker__quarter-text--in-range),
+  :global(.react-datepicker__year-text--selected),
+  :global(.react-datepicker__year-text--in-selecting-range),
+  :global(.react-datepicker__year-text--in-range) {
+    background-color: $brand-color-1;
+  }
+}
+
+.header {
+  margin: 0;
+  padding: 1rem 0.5rem;
+  display: flex;
+  justify-content: center;
+  // background-color: #f8f8f8;
+}
+
+.prev,
+.next {
+  display: block;
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+.prev {
+  margin: 0 0.75rem 0 0;
+}
+
+.next {
+  margin: 0 0 0 0.75rem;
+}
+
+.select {
+  padding: 0.25rem;
+  font-size: 0.875rem;
+  font-family: $font-family;
+  color: $text-color;
+  border-color: $neutral-color;
+  background: transparent;
+  border-radius: 3px;
+  border-width: 0;
+  text-align: right;
+
+  + .select {
+    border-left-width: 0;
+  }
+}

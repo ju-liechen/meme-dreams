@@ -1,0 +1,115 @@
+/* =============================================================================
+Component - Text input
+============================================================================= */
+
+@import 'styles/base/variables.scss';
+
+.input-component {
+  position: relative;
+  margin-bottom: $gutterR * 1.43;
+
+  &.error {
+    input {
+      border-color: $error;
+      color: $error;
+
+      &:focus {
+        border-color: $error;
+      }
+    }
+  }
+
+  label {
+    margin: 0;
+    padding: 0;
+    display: block;
+    color: $brand-color-1;
+    font-size: 0.8571rem;
+    font-weight: 400;
+    text-align: left;
+  }
+
+  input {
+    width: 100%;
+    padding: 0.75rem;
+    outline: none;
+    border: solid 1px $border-color;
+    border-radius: $border-radius;
+    color: $brand-color-1;
+    background-color: $white;
+    font-size: 1rem;
+    line-height: 1.5;
+    font-family: $font-family;
+    font-weight: normal;
+    -webkit-appearance: none;
+    color: $text-color;
+
+    &.no-label {
+      padding-top: 0.75rem;
+    }
+
+    &.has-icon {
+      padding-left: 3rem;
+    }
+
+    &[type='password'] {
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      font-size: 0.94rem;
+      letter-spacing: 0.15rem;
+
+      &::placeholder {
+        font-size: 1rem;
+        font-family: $font-family;
+        letter-spacing: normal;
+      }
+    }
+
+    &:focus {
+      border-color: $brand-color-1;
+    }
+
+    @media #{$phone} {
+      font-size: 16px;
+    }
+
+    &::placeholder {
+      color: $neutral-color;
+    }
+
+    &:read-only {
+      background-color: $brand-color-1;
+      color: $text-color-alt;
+    }
+  }
+
+  .toggle-pass {
+    all: unset;
+    position: absolute;
+    right: 1em;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    width: 1.5rem;
+    height: 1.5rem;
+    cursor: pointer;
+
+    .icon-wrap {
+      width: 1.2rem;
+      height: 1.2rem;
+      margin: auto;
+    }
+  }
+}
+
+.icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1.65rem;
+  height: 1.65rem;
+}
+
+.error-message {
+  margin: 0.5rem 0 0;
+}

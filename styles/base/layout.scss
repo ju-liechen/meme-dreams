@@ -1,0 +1,92 @@
+/* =============================================================================
+Layouts and layout helpers
+============================================================================= */
+.container {
+  margin-right: auto;
+  margin-left: auto;
+  width: calc(100% - ($gutter * 2));
+  max-width: $container-width;
+  position: relative;
+}
+
+.container--content {
+  max-width: $container-width-inner;
+}
+
+/* CSS Grid
+=================================================== */
+.grid {
+  display: grid;
+  grid-gap: $gutter;
+  justify-content: center;
+  grid-template-columns: repeat(12, 1fr);
+}
+
+.grid.grid-grow {
+  *[class^='span-'],
+  *[class*=' span-'] {
+    max-width: 100% !important;
+  }
+}
+
+@media #{$tablet-desktop} {
+  .grid {
+    @for $i from 1 through 12 {
+      > .span-#{$i} {
+        grid-column: span #{$i};
+      }
+    }
+  }
+}
+
+@media #{$phone-med-tablet} {
+  .grid {
+    @for $i from 1 through 12 {
+      .t-span-#{$i} {
+        grid-column: span #{$i};
+      }
+    }
+  }
+}
+
+@media #{$phone} {
+  .grid {
+    grid-gap: 1.5rem 1rem;
+
+    @for $i from 1 through 12 {
+      .m-span-#{$i} {
+        grid-column: span #{$i};
+      }
+    }
+  }
+}
+
+/* Margin utility classes
+=================================================== */
+$max: 20;
+$offset: 1;
+$unit: 'rem';
+
+// margin-top helper class
+@mixin list-loop($className, $styleName) {
+  $i: 0;
+  @while $i <= $max {
+    #{$className + $i} {
+      #{$styleName}: #{$i + $unit};
+    }
+    $i: $i + $offset;
+  }
+}
+@include list-loop('.mt-', 'margin-top');
+
+// margin-bottom helper class
+@mixin list-loop($className, $styleName) {
+  $i: 0;
+  @while $i <= $max {
+    #{$className + $i} {
+      #{$styleName}: #{$i + $unit};
+    }
+    $i: $i + $offset;
+  }
+}
+@include list-loop('.mb-', 'margin-bottom');

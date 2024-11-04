@@ -1,0 +1,19 @@
+/* =============================================================================
+Component - Page Loader
+============================================================================= */
+
+.wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.loader {
+  margin: 0;
+}
+
+.text {
+  font-size: 13px;
+}

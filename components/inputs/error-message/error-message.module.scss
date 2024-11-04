@@ -1,0 +1,11 @@
+/* =============================================================================
+Component - Error Message
+============================================================================= */
+@import 'styles/base/variables.scss';
+
+.error-message {
+  color: $error;
+  margin: -1rem 0 1rem 2px;
+  font-weight: 500;
+  font-size: 0.8571rem;
+}

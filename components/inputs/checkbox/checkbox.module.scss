@@ -1,0 +1,109 @@
+/* =============================================================================
+Component - Select field
+============================================================================= */
+@import 'styles/base/variables.scss';
+
+$check-size: 18px;
+
+.checkbox-component {
+  display: flex;
+  align-items: center;
+  margin-bottom: $gutterE * 1.1;
+
+  &.no-margin {
+    margin-bottom: 0;
+  }
+}
+
+.checkbox-component input[type='checkbox'] {
+  position: absolute;
+  left: -9999px;
+}
+
+.checkbox-component input[type='checkbox'] + label {
+  position: relative;
+  padding-left: $check-size * 1.5;
+  cursor: pointer;
+  text-transform: none;
+  font-weight: normal;
+  letter-spacing: unset;
+  margin: 0;
+  padding-left: $check-size * 1.5;
+  font-size: 1rem;
+  font-weight: normal;
+  display: inline-block;
+  color: $brand-color-1;
+  font-weight: 500;
+}
+
+.checkbox-component:hover {
+  input[type='checkbox'] + label::before,
+  [type='checkbox'] + label::after {
+    border-color: $brand-color-1;
+  }
+}
+
+.checkbox-component input[type='checkbox'] + label::before,
+.checkbox-component [type='checkbox'] + label::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: $white;
+  border: 1px solid $brand-color-1;
+  width: $check-size;
+  height: $check-size;
+  border-radius: 3px;
+  color: $white;
+  display: block;
+}
+
+.checkbox-component [type='checkbox'] + label::after {
+  background-image: url(/images/controls/check-white.svg);
+  background-repeat: no-repeat;
+  background-size: 84% 84%;
+  background-color: $brand-color-1;
+  transition: all 0.2s;
+  background-position: center center;
+  border-color: $brand-color-1;
+}
+
+.checkbox-component input[type='checkbox']:not(:checked) + label::after {
+  opacity: 0;
+}
+
+.checkbox-component input[type='checkbox']:checked + label::after {
+  opacity: 1;
+}
+
+.has-icon.checkbox-component {
+  position: relative;
+  height: 2rem;
+
+  label {
+    cursor: pointer;
+    padding-left: 2.5rem;
+  }
+
+  input[type='checkbox'] {
+    &:before,
+    &:after {
+      display: none !important;
+    }
+
+    + .icon {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 2rem;
+      height: 2rem;
+      color: $brand-color-1;
+      pointer-events: none;
+    }
+
+    &:checked + .icon {
+      color: $brand-color-1;
+    }
+  }
+}

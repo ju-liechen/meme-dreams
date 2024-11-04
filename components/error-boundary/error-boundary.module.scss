@@ -1,0 +1,23 @@
+/* =============================================================================
+Component - Error Boundary
+============================================================================= */
+@import 'styles/base/variables.scss';
+
+.wrapper {
+  padding: 2rem 0;
+}
+
+.title {
+  margin: 0 0 2rem 0;
+}
+
+.caption {
+  margin: 0 0 2rem 0;
+  font-size: 1.245rem;
+  line-height: 1.2;
+  max-width: 400px;
+}
+.actions {
+  display: flex;
+  gap: 1rem;
+}

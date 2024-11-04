@@ -1,0 +1,95 @@
+/* =============================================================================
+Component - Select field
+============================================================================= */
+@import 'styles/base/variables.scss';
+
+.select-input-component {
+  margin-bottom: 2rem;
+}
+
+.select-trigger {
+  display: block;
+  line-height: 1;
+  border: solid 1px $border-color;
+  border-radius: $border-radius;
+  color: $brand-color-1;
+  background-color: $white;
+  width: 100%;
+  font-size: 1rem;
+  padding: 1rem 2rem 1rem 1rem;
+  text-align: left;
+  outline: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.select-input-component.error .select-trigger {
+  border-color: $error;
+  color: $error;
+  &:focus {
+    border-color: $error;
+  }
+}
+
+.select-label {
+  display: block;
+  width: 100%;
+  color: $brand-color-1;
+  font-size: 0.8571rem;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+}
+
+.select-arrow {
+  width: 1rem;
+  height: 1rem;
+}
+
+.select-trigger:hover {
+  cursor: pointer;
+}
+
+.select-trigger:focus {
+  border-color: $brand-color-1;
+}
+
+.select-trigger[data-placeholder] {
+  color: $brand-color-1;
+}
+
+.select-content {
+  overflow: hidden;
+  background-color: $white;
+  border-radius: $border-radius;
+  border: solid 1px $border-color;
+  margin-top: 4px;
+}
+
+.select-item {
+  font-size: 1rem;
+  line-height: 1;
+  color: $brand-color-1;
+  position: relative;
+  user-select: none;
+  width: 100%;
+  padding: 1.5rem 0.75rem;
+  text-shadow: none;
+  cursor: pointer;
+}
+
+.select-item[data-disabled] {
+  pointer-events: none;
+}
+
+.select-item[data-highlighted] {
+  outline: none;
+  background-color: $grey;
+  font-weight: 300;
+  text-shadow: 0 0 0.4px currentColor, 0 0 0.4px currentColor;
+}
+
+.error-message {
+  margin-top: 0.5rem;
+}

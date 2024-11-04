@@ -1,0 +1,67 @@
+@import 'styles/base/variables.scss';
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 3rem 0;
+
+  a {
+    all: unset;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    font-size: 14px;
+    color: $neutral-color;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &.active {
+      background-color: $brand-color-1;
+      color: $text-color;
+      font-weight: 600;
+    }
+  }
+
+  a.page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: unset;
+    min-width: 30px;
+    transition: background-color 200ms;
+
+    &:not(.active) {
+      color: $neutral-color;
+    }
+
+    &:hover {
+      background-color: $brand-color-1;
+    }
+  }
+
+  a.prev,
+  a.next {
+    span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    span svg {
+      width: 70%;
+      height: 700%;
+    }
+  }
+
+  .disabled:not(.page) {
+    opacity: 0.1;
+    cursor: unset;
+  }
+
+  .spacer {
+    align-self: flex-end;
+    padding-bottom: 3px;
+    color: $neutral-color;
+  }
+}

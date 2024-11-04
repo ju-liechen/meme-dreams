@@ -1,0 +1,315 @@
+/* =============================================================================
+Component - Button
+============================================================================= */
+@import 'styles/base/variables.scss';
+
+/* Base & Primary */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  cursor: pointer;
+
+  .btn-wrap {
+    position: relative;
+    border-radius: 100px;
+    background-color: $black;
+    border: solid 1px $black;
+    color: $white;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 17.5px; /* 125% */
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease-in-out,
+      border-color 0.2s ease;
+    padding: 10px 16px;
+  }
+
+  &-full-width {
+    width: 100%;
+
+    .btn-wrap {
+      width: 100%;
+    }
+  }
+
+  &:disabled,
+  &.disabled {
+    cursor: default;
+    pointer-events: none;
+  }
+
+  &.is-loading .btn-wrap {
+    padding-right: 10px;
+  }
+
+  &.min-width {
+    min-width: 7.75rem;
+  }
+
+  &:active {
+    transform: translateY(2px);
+  }
+
+  .button-loading {
+    margin-left: 1rem;
+    width: 0.75rem;
+    position: relative;
+    top: 2px;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      .btn-wrap {
+        transition: background-color 0.2s ease, color 0.2s ease,
+          border-color 0.2s ease;
+      }
+    }
+  }
+
+  /* Primary
+    =================================================== */
+  &.btn-primary:disabled .btn-wrap,
+  &.btn-primary.disabled .btn-wrap {
+    background: $brand-color-1;
+    border: solid 1px $brand-color-1;
+    color: $white;
+    cursor: default;
+  }
+
+  @media (hover: hover) {
+    &.btn-primary {
+      &:hover .btn-wrap {
+        text-decoration: none;
+        background-color: $brand-color-2;
+        border: solid 1px $brand-color-2;
+        color: $black;
+      }
+    }
+  }
+
+  /* Secondary
+    =================================================== */
+  &.btn-secondary {
+    .btn-wrap {
+      background-color: $brand-color-2;
+      border-color: $brand-color-2;
+      color: $black;
+    }
+
+    &:disabled .btn-wrap,
+    &.disabled .btn-wrap {
+      background-color: $black;
+      border-color: $black;
+      color: $white;
+      cursor: default;
+    }
+
+    @media (hover: hover) {
+      &:hover .btn-wrap {
+        background-color: $black;
+        border-color: $black;
+        color: $white;
+      }
+    }
+  }
+
+  /* Outline
+    =================================================== */
+  &.btn-outline {
+    .btn-wrap {
+      border: 1px solid $brand-color-1;
+      color: $black;
+      background-color: transparent;
+      gap: 6px;
+
+      &.btn-text {
+        transition: color 0.2s ease-out;
+      }
+
+      .btn-text + :global(.icon-wrap) {
+        margin-left: 0;
+      }
+    }
+
+    &:disabled .btn-wrap,
+    &.disabled .btn-wrap {
+      background-color: $black;
+      cursor: default;
+    }
+
+    @media (hover: hover) {
+      &:hover .btn-wrap {
+        border-color: $brand-color-2;
+      }
+    }
+  }
+
+  /* Text
+    =================================================== */
+
+  &.btn-text {
+    font-family: inherit;
+    font-size: inherit;
+    padding: 6px 0 10px;
+
+    .btn-wrap {
+      background-color: transparent;
+      border-color: transparent;
+      color: $text-color;
+      padding: 0;
+    }
+
+    &.btn-icon .btn-wrap :global(.icon-wrap) {
+      width: 1rem;
+      height: 1rem;
+    }
+
+    &:disabled .btn-wrap,
+    &.disabled .btn-wrap {
+      background-color: transparent;
+      border-color: transparent;
+      color: $black;
+    }
+
+    @media (hover: hover) {
+      &:hover .btn-wrap {
+        background-color: transparent;
+        border-color: transparent;
+        color: $black;
+      }
+    }
+  }
+
+  /* Helpers
+    =================================================== */
+  &:global(.btn-center) {
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  &:global(.btn-fullwidth),
+  &:global(.btn-fullwidth) .btn-wrap {
+    width: 100%;
+  }
+
+  /* Button has icon but different variation
+  =================================================== */
+  &.btn-has-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+    .btn-wrap {
+      display: flex;
+      align-items: center;
+    }
+
+    :global(.icon-wrap) {
+      display: inline-block;
+      width: 1.15rem;
+      height: 1.15rem;
+      position: relative;
+      transform: translateX(0px);
+      transition: transform 0.2s ease;
+
+      :global(svg.icon) {
+        position: absolute;
+        top: calc(50% + 1px);
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    :global(.icon-wrap) + .btn-text,
+    .btn-text + :global(.icon-wrap) {
+      margin-left: 12px;
+    }
+
+    .hidden-text span:global(.visually-hidden) + :global(.icon-wrap) {
+      margin-left: 0 !important;
+    }
+  }
+
+  /* Icon-specific variation
+  =================================================== */
+  &.btn-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+    .btn-wrap {
+      display: flex;
+      align-items: center;
+      background: transparent;
+      color: $black;
+      border-color: transparent;
+    }
+
+    :global(.icon-wrap) {
+      display: inline-block;
+      width: 1.15rem;
+      height: 1.15rem;
+      position: relative;
+      transform: translateX(0px);
+      transition: transform 0.2s ease;
+
+      :global(svg.icon) {
+        position: absolute;
+        top: calc(50% + 1px);
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    :global(.icon-wrap) + .btn-text,
+    .btn-text + :global(.icon-wrap) {
+      margin-left: 12px;
+    }
+
+    .hidden-text span:global(.visually-hidden) + :global(.icon-wrap) {
+      margin-left: 0 !important;
+    }
+  }
+
+  /* Small
+  =================================================== */
+  &.btn-small {
+    .btn-wrap {
+      padding: 6px 8px;
+    }
+
+    &.btn-text {
+      padding: 3px 8px 4px;
+
+      .btn-wrap {
+        padding: 3px 8px 1px;
+      }
+    }
+
+    &.btn-icon {
+      .btn-wrap {
+        padding-right: 16px;
+      }
+    }
+
+    :global(.icon-wrap) {
+      :global(svg.icon) {
+        width: 1rem;
+        height: 1rem;
+      }
+    }
+  }
+}

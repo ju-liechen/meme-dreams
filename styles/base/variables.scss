@@ -1,0 +1,89 @@
+/* =============================================================================
+Variables
+============================================================================= */
+// Import this file into css modules in the components folder
+
+/* General
+=================================================== */
+$gutter: 16px;
+$gutterR: 1rem;
+$gutterE: 1em;
+$border-radius: 0.25rem;
+$container-width: 1280px;
+$container-width-inner: 800px;
+$transition: all 0.25s ease-in-out;
+$box-shadow: 0 3px 7px 0 rgba(0, 0, 0, 0.1);
+$box-shadow-light: 0 2px 7px 0 rgba(40, 40, 40, 0.05);
+$drop-shadow: drop-shadow($box-shadow);
+
+/* Typography
+=================================================== */
+$font-family: 'Helvetica', arial, sans-serif;
+$line-height: 1.6;
+$font-size: 16px;
+
+/* Colors
+=================================================== */
+$brand-color-1: #8f9e7f;
+$brand-color-2: #9385bb;
+$brand-color-3: #315860;
+$brand-color-4: #151122;
+$brand-color-5: #262231;
+$brand-color-6: #932b7f;
+$brand-color-7: #e54b63;
+$brand-color-8: #f6774c;
+$brand-color-9: #e9a950;
+
+$white: #fff;
+$black: #1c1c1c;
+$grey: #e8e8e9;
+
+$light-green: #e1efb0;
+$light-blue: #ebf4fd;
+$light-green: #f5faf3;
+$mint-green: #d4e6d4;
+$dark-green: #0c6610;
+$light-grey: #efefef;
+$bg-grey: #fafafa;
+$mustard: #f8c437;
+$dark-grey: #82867d;
+$middle-grey: #dfdddd;
+
+$body-color: white;
+$border-color: #efefef;
+$border-color-alt: #e1e7f0;
+$text-color: #272727;
+$text-color-alt: #7a7a7c;
+$heading-color: $black;
+$neutral-color: #7a7a7a;
+
+$success: #74d2b6;
+$warning: #fbb231;
+$error: #fe4669;
+
+/* Media Queries / layout
+=================================================== */
+$desktop-extra-large-min-width: 1600px;
+$desktop-large-min-width: 1400px;
+$desktop-max-width: 1200px;
+$desktop-min-width: 1025px;
+$tablet-max-width: 1024px;
+$tablet-min-width: 768px;
+$phone-max-width: 767px;
+$phone-med-width: 650px;
+$phone-lrg-width: 376px;
+$phone-min-width: 320px;
+$desktop-large: 'screen and (min-width: $desktop-large-min-width})';
+$desktop: 'screen and (min-width: #{$desktop-min-width})';
+$tablet-desktop: 'screen and (min-width: #{$tablet-min-width})';
+$tablet-landscape-desktop: 'screen and (min-width: #{$tablet-max-width})';
+$tablet: 'screen and (min-width: #{$tablet-min-width}) and (max-width: #{$tablet-max-width})';
+$phone-tablet: 'screen and (max-width: #{$tablet-max-width})';
+$phone: 'screen and (max-width: #{$phone-max-width})';
+$phone-med-tablet: 'screen and (min-width: #{$phone-med-width}) and (max-width: #{$tablet-max-width})';
+$phone-landscape: 'screen and (max-width: #{$phone-max-width}) and (orientation: portrait)';
+$phone-large: 'screen and (min-width: #{$phone-lrg-width}) and (max-width: #{$phone-max-width})';
+$phone-small: 'screen and (max-width: #{$phone-min-width})';
+$phone-med: 'screen and (max-width: #{$phone-med-width})';
+$phone-to-desktop-max: 'screen and (max-width: $desktop-max-width})';
+$phone-to-desktop-max: 'screen and (max-width: $desktop-max-width})';

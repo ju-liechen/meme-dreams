@@ -1,0 +1,73 @@
+/* =============================================================================
+Component - Select field
+============================================================================= */
+@import 'styles/base/variables.scss';
+
+$radio-size: 18px;
+
+.radio-button-component {
+  margin-bottom: $gutterE * 1.1;
+}
+
+.radio-button-component input[type='radio'] {
+  position: absolute;
+  left: -9999px;
+}
+
+.radio-button-component input[type='radio'] + label {
+  position: relative;
+  padding-left: $radio-size * 1.5;
+  cursor: pointer;
+  text-transform: none;
+  font-weight: normal;
+  letter-spacing: unset;
+  margin: 0;
+  padding-left: $radio-size * 1.5;
+  font-size: 1rem;
+  font-weight: normal;
+  display: inline-block;
+  color: $brand-color-1;
+  font-weight: 500;
+}
+
+.radio-button-component:hover {
+  input[type='radio'] + label::before,
+  [type='radio'] + label::after {
+    border-color: $brand-color-1;
+  }
+}
+
+.radio-button-component input[type='radio'] + label::before,
+.radio-button-component [type='radio'] + label::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: $white;
+  border: 1px solid $brand-color-1;
+  width: $radio-size;
+  height: $radio-size;
+  border-radius: 3px;
+  color: $white;
+  display: block;
+  border-radius: 50%;
+}
+
+.radio-button-component [type='radio'] + label::after {
+  background-image: url(/images/controls/check-white.svg);
+  background-repeat: no-repeat;
+  background-size: 84% 84%;
+  background-color: $brand-color-1;
+  transition: all 0.2s;
+  background-position: center center;
+  border-color: $brand-color-1;
+}
+
+.radio-button-component input[type='radio']:not(:checked) + label::after {
+  opacity: 0;
+}
+
+.radio-button-component input[type='radio']:checked + label::after {
+  opacity: 1;
+}

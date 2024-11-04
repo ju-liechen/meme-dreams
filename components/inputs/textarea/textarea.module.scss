@@ -1,0 +1,66 @@
+/* =============================================================================
+Component - Text input
+============================================================================= */
+
+@import 'styles/base/variables.scss';
+
+.input-component {
+  position: relative;
+  margin-bottom: $gutterE * 1.75;
+
+  &.error {
+    textarea {
+      border-color: $error;
+      color: $error;
+
+      &:focus {
+        border-color: $error;
+      }
+    }
+  }
+
+  label {
+    margin: 0;
+    padding: 0;
+    display: block;
+    color: $brand-color-1;
+    font-size: 0.8571rem;
+    font-weight: 400;
+    text-align: left;
+    padding-top: 0.6rem;
+  }
+
+  textarea {
+    width: 100%;
+    padding: 0.75rem;
+    outline: none;
+    border: solid 1px $border-color;
+    border-radius: $border-radius;
+    color: $brand-color-1;
+    background-color: $white;
+    font-size: 1rem;
+    font-family: $font-family;
+    font-weight: normal;
+    -webkit-appearance: none;
+    color: $text-color;
+    resize: vertical;
+    display: block;
+
+    &:focus {
+      border-color: $brand-color-1;
+    }
+
+    @media #{$phone} {
+      font-size: 16px;
+    }
+
+    &::placeholder {
+      color: $neutral-color;
+    }
+
+    &:read-only {
+      background-color: $border-color;
+      color: $dark-grey;
+    }
+  }
+}

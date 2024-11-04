@@ -1,0 +1,91 @@
+/* =============================================================================
+Component - Popover menu
+============================================================================= */
+@import 'styles/base/variables.scss';
+
+.trigger {
+  position: absolute;
+  top: 0.25rem;
+  right: 0.5rem;
+  z-index: 3;
+
+  &-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: $black;
+  }
+}
+
+.content {
+  border-radius: 0.5rem;
+  padding: 0.25rem;
+  background-color: $white;
+  box-shadow: 0, 0, 15px rgba($black, 0.2);
+  border: 1px solid $brand-color-1;
+  animation-duration: 200ms;
+  outline: none;
+  animation-timing-function: ease;
+  will-change: transform, opacity;
+  transform-origin: var(--radix-popover-content-transform-origin);
+
+  &[data-state='open'][data-side='top'] {
+    animation-name: slideDownAndFade;
+  }
+  &[data-state='open'][data-side='right'] {
+    animation-name: slideLeftAndFade;
+  }
+  &[data-state='open'][data-side='bottom'] {
+    animation-name: slideUpAndFade;
+  }
+  &[data-state='open'][data-side='left'] {
+    animation-name: slideRightAndFade;
+  }
+}
+
+.arrow {
+  fill: $white;
+}
+
+@keyframes slideUpAndFade {
+  from {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideRightAndFade {
+  from {
+    opacity: 0;
+    transform: translateX(-2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideDownAndFade {
+  from {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideLeftAndFade {
+  from {
+    opacity: 0;
+    transform: translateX(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

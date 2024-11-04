@@ -1,0 +1,48 @@
+/* =============================================================================
+Component - Form Message
+============================================================================= */
+@import 'styles/base/variables.scss';
+
+.form-message {
+  background-color: $neutral-color;
+  color: $text-color;
+  border-radius: 0.57rem;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 1.25rem;
+  display: flex;
+
+  .icon {
+    border-radius: 50%;
+    width: 1.4286rem;
+    height: 1.4286rem;
+    background-color: $white;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 1rem;
+    margin-top: 0.25rem;
+
+    span {
+      width: 54%;
+      height: 54%;
+    }
+  }
+
+  &.success {
+    background-color: $brand-color-2;
+  }
+
+  &.neutral {
+    background-color: $brand-color-3;
+  }
+
+  &.error {
+    background-color: $error;
+
+    .content {
+      color: $white;
+    }
+  }
+}
