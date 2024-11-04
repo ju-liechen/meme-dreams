@@ -1,0 +1,21 @@
+.base-container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  width: 100%;
+  background-color: black;
+  overflow: hidden;
+
+  .body {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow: auto;
+    overflow-x: hidden;
+    padding: 0 0 1.4rem 1.8rem;
+    flex-grow: 1;
+    flex-shrink: 1;
+  }
+}
