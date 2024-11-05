@@ -2,12 +2,81 @@
 Component - Notification bar
 ============================================================================= */
 
+@import 'styles/base/variables.scss';
+
 .wrapper {
+  width: 100%;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 999999;
+
+  .body-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 15px;
+
+    .icon {
+      width: 19px;
+      height: 19px;
+      flex-shrink: 0;
+
+      &.success {
+        color: $black-5;
+      }
+    }
+
+    .text {
+      font-family: $font-family;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 17px; /* 121.429% */
+      text-align: center;
+    }
+  }
+
+  .icon-btn {
+    all: unset;
+    display: flex;
+
+    .close-icon {
+      width: 15px;
+      height: 15px;
+      position: absolute;
+      top: 14px;
+      right: 20px;
+      cursor: pointer;
+    }
+  }
+
   &.success {
-    background: lightgreen;
+    color: $black-5;
+    background: rgb(161, 237, 161);
   }
 
   &.error {
-    background: lightcoral;
+    color: $error;
+    background: rgb(234, 167, 167);
+  }
+}
+
+@media #{$phone} {
+  .wrapper {
+    .body-wrapper {
+      align-items: flex-start;
+      gap: 15px;
+      padding-right: 40px;
+
+      .text {
+        font-size: 12px;
+        line-height: 1.3;
+        text-align: left;
+        text-wrap: balance;
+      }
+    }
   }
 }

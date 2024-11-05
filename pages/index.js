@@ -36,7 +36,10 @@ const useGenerateMeme = () => {
 const Index = () => {
   const setNotification = useStore((state) => state.setNotification)
   const { mutate: generateMeme, data: meme, isLoading: isGenerating, error } = useGenerateMeme()
-
+  setNotification({
+    type: 'error',
+    text: 'Error generating meme :(',
+  })
   const methods = useForm({
     onSubmit: async (data) => {
       generateMeme(data, {
