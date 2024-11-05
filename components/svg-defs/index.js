@@ -173,6 +173,31 @@ export const SvgDefs = () => (
           d="M18.502 15.629v-7.529h3.388l-5.271-4.894-5.271 4.894h3.388v15.059h-3.388l5.271 4.894 5.271-4.894h-3.388v-7.529z"
         ></path>
       </symbol>
+      <symbol id="icon-success" viewBox="0 0 32 32">
+        <path
+          strokeLinejoin="round"
+          strokeLinecap="round"
+          strokeMiterlimit="4"
+          strokeWidth="1.3333"
+          d="M30.005 16c0 7.735-6.27 14.005-14.005 14.005s-14.005-6.27-14.005-14.005c0-7.735 6.27-14.005 14.005-14.005s14.005 6.27 14.005 14.005z"
+        ></path>
+        <path
+          strokeLinejoin="round"
+          strokeLinecap="round"
+          strokeMiterlimit="4"
+          strokeWidth="1.3333"
+          d="M10.465 16.527l3.35 3.35 7.608-7.608"
+        ></path>
+      </symbol>
+      <symbol id="icon-error-warning" viewBox="0 0 32 32">
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeMiterlimit="4"
+          strokeWidth="2"
+          d="M16 11.556v5.556M29.333 16c0 7.364-5.97 13.333-13.333 13.333s-13.333-5.97-13.333-13.333v0c0-7.364 5.97-13.333 13.333-13.333s13.333 5.97 13.333 13.333v0zM16 21.556h0.012v0.012h-0.012v-0.012z"
+        ></path>
+      </symbol>
     </defs>
   </svg>
 )
