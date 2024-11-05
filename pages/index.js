@@ -23,8 +23,12 @@ import styles from './home.module.scss'
 const useGenerateMeme = () => {
   return useMutation({
     mutationFn: async (data) => {
-      const response = await axiosClient.get(`/meme?font_size=${data.fontSize}&top=${data.topText}&font=${data.font}&bottom=${data.bottomText}&meme=${data.imageName}`)
-      return response.data
+      const response = await axiosClient.get(
+        `/meme?font_size=${data.fontSize}&top=${data.topText}&font=${data.font}&bottom=${data.bottomText}&meme=${data.imageName}`, {
+        responseType: 'arraybuffer',
+      })
+      const base64Image = `data:image/jpeg;base64,${Buffer.from(response.data, 'binary').toString('base64')}`
+      return base64Image
     }
   })
 }
@@ -40,14 +44,14 @@ const Index = () => {
           console.log(response)
           setNotification({
             type: 'success',
-            text: 'Meme generated successfully',
+            text: 'Meme generated successfully!',
           })
         },
         onError: (error) => {
           console.log(error)
           setNotification({
             type: 'error',
-            text: 'Error generating meme',
+            text: 'Error generating meme :(',
           })
         },
       })
@@ -84,7 +88,7 @@ const Index = () => {
             name="imageName"
             label="Image Name"
             type="text"
-            placeholder="Condescending-Wonka"
+            placeholder="Big-Bird"
           />
           <SubmitButton>
             Generate
@@ -95,7 +99,7 @@ const Index = () => {
         {(() => {
           if (isGenerating) return <p>Generating meme...</p>
           if (error) return <p>Error: {error.message}</p>
-          if (meme) return <p>Meme generated! Check console</p>
+          if (meme) return <img src={meme} alt="Generated meme" className={styles['generated-img']} />
           return <p>Some sort of animation</p> 
         })()}
       </div>

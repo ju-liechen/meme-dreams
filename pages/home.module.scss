@@ -16,5 +16,12 @@
   .picture {
     display: flex;
     justify-content: center;
+
+    .generated-img {
+      display: flex;
+      border-radius: 4px;
+      object-fit: contain;
+      max-width: 500px;
+    }
   }
 }
