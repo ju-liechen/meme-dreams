@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useMutation } from '@tanstack/react-query'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as y from 'yup'
@@ -38,9 +39,18 @@ const useGenerateMeme = () => {
   })
 }
 
+const formatFileName = (...args) => {
+  return args
+    .filter(Boolean)
+    .map((str) => str.trim().replace(/\s+/g, '-'))
+    .join('-')
+}
+
 const Index = () => {
   const setNotification = useStore((state) => state.setNotification)
   const { mutate: generateMeme, data: meme, isLoading: isGenerating, error } = useGenerateMeme()
+  const [fileName, setFileName] = useState('');
+
   const methods = useForm({
     onSubmit: async (data) => {
       const memeData = {
@@ -53,6 +63,7 @@ const Index = () => {
 
       generateMeme(memeData, {
         onSuccess: (response) => {
+          setFileName(formatFileName(memeData.topText, memeData.bottomText, memeData.imageName))
           setNotification({
             type: 'success',
             text: 'Meme generated successfully!',
@@ -116,7 +127,7 @@ const Index = () => {
         {(() => {
           if (isGenerating) return <p>Generating meme...</p>
           if (error) return <p>Error: {error.message}</p>
-          if (meme) return <GeneratedImage base64Image={meme} altText="Generated meme"/>
+          if (meme) return <GeneratedImage base64Image={meme} altText={fileName} />
           return <p>Some sort of animation</p> 
         })()}
       </div>
@@ -128,6 +139,13 @@ Index.Layouts = ['BaseLayout']
 export default Index
 
 const GeneratedImage = ({ base64Image, altText }) => {
+  const downloadImage = () => {
+    const link = document.createElement('a')
+    link.href = base64Image
+    link.download = `${altText || 'meme-dreams-generated-image'}.png`
+    link.click()
+  }
+
   return (
     <div className={styles['image-container']}>
       <img src={base64Image} alt={altText} className={styles['generated-img']} />
@@ -136,6 +154,7 @@ const GeneratedImage = ({ base64Image, altText }) => {
           icon="download"
           hideText
           className={styles['action-btn']}
+          onClick={downloadImage}
         />
       </Tooltip>
     </div>
