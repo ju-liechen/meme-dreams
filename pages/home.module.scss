@@ -1,0 +1,27 @@
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  height: 50%;
+
+  color: white;
+
+  .inputs, .picture {
+    flex: 1;
+    padding: 16px;
+  }
+
+  .picture {
+    display: flex;
+    justify-content: center;
+
+    .generated-img {
+      display: flex;
+      border-radius: 4px;
+      object-fit: contain;
+      max-width: 500px;
+    }
+  }
+}

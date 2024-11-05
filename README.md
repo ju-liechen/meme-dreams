@@ -1,4 +1,14 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) and modified with some useful utilities, components, and settings that we ([Input Logic](https://github.com/inputlogic)) often need.
+# About Meme Dreams
+Meme Dreams is an interface for creating custom memes, powered by [Rapid API’s free Meme Generator API](https://rapidapi.com/meme-generator-api-meme-generator-api-default/api/meme-generator). <br/>
+<br/>
+This mini web app serves as a creative playground for Julie to hone her frontend skills and experiment with some new ideas.<br/>
+<br/>
+To run this app locally, you’ll need an API key. Please reach out to Julie, the creator, to obtain one. <br/>
+Or, subscribe to your own service [here](https://rapidapi.com/meme-generator-api-meme-generator-api-default/api/meme-generator).
+
+# Template Info
+
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) and modified with some useful utilities, components, and settings that ([Input Logic](https://github.com/inputlogic)) often uses are part of the [Next Starter Template](https://github.com/inputlogic/next-starter).
 
 ## Local development
 
