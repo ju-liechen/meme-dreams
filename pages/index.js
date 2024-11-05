@@ -1,7 +1,11 @@
 import { useMutation } from '@tanstack/react-query'
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as y from 'yup'
+
 
 import { axiosClient } from 'util/axios-client'
 import { useStore } from 'util/store'
+import { Button } from 'components/button'
 import { Form, useForm, SubmitButton, TextInput } from 'components/form'
 
 import styles from './home.module.scss'
@@ -36,22 +40,25 @@ const useGenerateMeme = () => {
 const Index = () => {
   const setNotification = useStore((state) => state.setNotification)
   const { mutate: generateMeme, data: meme, isLoading: isGenerating, error } = useGenerateMeme()
-  setNotification({
-    type: 'error',
-    text: 'Error generating meme :(',
-  })
   const methods = useForm({
     onSubmit: async (data) => {
-      generateMeme(data, {
+      const memeData = {
+        font: data.font === '' ? 'Impact' : data.font,
+        fontSize: data.fontSize === '' ? 50 : data.fontSize,
+        imageName: data.imageName === '' ? 'Condescending-Wonka' : data.imageName,
+        topText: data.topText === '' ? ' ' : data.topText,
+        bottomText: data.bottomText === '' ? ' ' : data.bottomText,
+      }
+
+      generateMeme(memeData, {
         onSuccess: (response) => {
-          console.log(response)
           setNotification({
             type: 'success',
             text: 'Meme generated successfully!',
           })
         },
         onError: (error) => {
-          console.log(error)
+          console.log('Error generating meme: ', error)
           setNotification({
             type: 'error',
             text: 'Error generating meme :(',
@@ -59,6 +66,12 @@ const Index = () => {
         },
       })
     },
+    resolver: yupResolver(
+      y.object().shape({
+        topText: y.string().required('Top text is required'),
+        bottomText: y.string(),
+      })
+    ),
   })
 
   return (
@@ -91,7 +104,7 @@ const Index = () => {
             name="imageName"
             label="Image Name"
             type="text"
-            placeholder="Big-Bird"
+            placeholder="Condescending-Wonka"
           />
           <SubmitButton>
             Generate
@@ -102,7 +115,7 @@ const Index = () => {
         {(() => {
           if (isGenerating) return <p>Generating meme...</p>
           if (error) return <p>Error: {error.message}</p>
-          if (meme) return <img src={meme} alt="Generated meme" className={styles['generated-img']} />
+          if (meme) return <GeneratedImage base64Image={meme} altText="Generated meme"/>
           return <p>Some sort of animation</p> 
         })()}
       </div>
@@ -112,3 +125,16 @@ const Index = () => {
 
 Index.Layouts = ['BaseLayout']
 export default Index
+
+const GeneratedImage = ({ base64Image, altText }) => {
+  return (
+    <div className={styles['image-container']}>
+      <img src={base64Image} alt={altText} className={styles['generated-img']} />
+      <Button
+        icon="download"
+        hideText
+        className={styles['action-btn']}
+      />
+    </div>
+  )
+}
