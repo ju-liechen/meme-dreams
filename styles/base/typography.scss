@@ -76,8 +76,8 @@ p {
 }
 
 a {
+  all: unset;
   color: $text-color;
-  text-decoration: underline;
 
   &:hover {
     text-decoration: none;
