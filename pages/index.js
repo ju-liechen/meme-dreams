@@ -1,5 +1,3 @@
-import {Navigation} from 'components/navigation'
-
 const Index = () => {
   return (
     <>
