@@ -7,6 +7,7 @@ import { axiosClient } from 'util/axios-client'
 import { useStore } from 'util/store'
 import { Button } from 'components/button'
 import { Form, useForm, SubmitButton, TextInput } from 'components/form'
+import { Tooltip } from 'components/tooltip'
 
 import styles from './home.module.scss'
 
@@ -130,11 +131,13 @@ const GeneratedImage = ({ base64Image, altText }) => {
   return (
     <div className={styles['image-container']}>
       <img src={base64Image} alt={altText} className={styles['generated-img']} />
-      <Button
-        icon="download"
-        hideText
-        className={styles['action-btn']}
-      />
+      <Tooltip label="Download">
+        <Button
+          icon="download"
+          hideText
+          className={styles['action-btn']}
+        />
+      </Tooltip>
     </div>
   )
 }
