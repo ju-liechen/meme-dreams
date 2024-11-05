@@ -17,7 +17,7 @@ export const Tooltip = forwardRef(({ children, label, position }, ref) => {
             sideOffset={5}
           >
             {label}
-            <ToolTip.Arrow className={styles['tooltip-arow']} />
+            <ToolTip.Arrow className={styles['tooltip-arrow']} />
           </ToolTip.Content>
         </ToolTip.Portal>
       </ToolTip.Root>
