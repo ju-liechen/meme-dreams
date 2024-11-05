@@ -1,0 +1,33 @@
+@import 'styles/base/variables';
+
+.nav-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between; 
+  width: 100%;
+
+  padding-block: 2rem;
+  padding-inline: 1rem;
+  padding-bottom: 2rem;
+
+  font-family: $font-family;
+  color: white;
+
+  z-index: 100;
+
+  img {
+    cursor: pointer;
+  }
+
+  h1 {
+    color: white;
+    flex-grow: 1;
+    cursor: pointer;
+  }
+
+  span {
+    color: white;
+    cursor: pointer;
+  }
+}

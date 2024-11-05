@@ -1,17 +1,13 @@
-import Head from 'next/head'
-import Link from 'next/link'
+import {Navigation} from 'components/navigation'
 
 const Index = () => {
   return (
     <>
-      <Head>
-        <title>Next Starter</title>
-      </Head>
-      <div>
-        <Link href='/demo'>Demo</Link>
-      </div>
+      <main>
+      </main>
     </>
   )
 }
 
+Index.Layouts = ['BaseLayout']
 export default Index
