@@ -27,7 +27,7 @@ export const SelectInput = forwardRef(
       placeholder,
       defaultValue,
       error,
-      options = [{}],
+      options = [],
       required,
       onValueChange,
       ...props
@@ -50,9 +50,7 @@ export const SelectInput = forwardRef(
           name={name}
           required={required}
           onOpenChange={(open) => setIsOpen(open)}
-          onValueChange={(value) => {
-            if (onValueChange) onValueChange(value)
-          }}
+          onValueChange={onValueChange}
           {...props}
         >
           {label && (
