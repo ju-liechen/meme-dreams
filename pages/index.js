@@ -68,9 +68,9 @@ const Index = () => {
   const { setValue, handleSubmit, ...methods } = useForm({
     onSubmit: async (data) => {
       const memeData = {
-        font: data.font === '' ? 'Impact' : data.font,
+        font: !data.font ? 'Impact' : data.font,
         fontSize: data.fontSize === '' ? 50 : data.fontSize,
-        imageName: data.imageName === '' ? 'Condescending-Wonka' : data.imageName,
+        imageName: !data.imageName ? 'Condescending-Wonka' : data.imageName,
         topText: data.topText === '' ? ' ' : data.topText,
         bottomText: data.bottomText === '' ? ' ' : data.bottomText,
       }
@@ -155,7 +155,7 @@ const Index = () => {
             if (isGenerating) return <p>Generating meme...</p>
             if (error) return <p>Error: {error.message}</p>
             if (meme) return <GeneratedImage base64Image={meme} altText={fileName} />
-            return <p>Some sort of animation</p> 
+            return <img src="images/stickman-dancing.gif" alt="Waiting..." width={400} />
           })()}
         </div>
       </div>
