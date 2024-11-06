@@ -1,0 +1,94 @@
+/* =============================================================================
+Component - Modal
+============================================================================= */
+.modal-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  animation-name: modalOpen;
+  animation-duration: 0.2s;
+
+  .modal-content {
+    width: 90%;
+    background-color: $brand-color-9;
+    border-radius: $border-radius * 2;
+    box-shadow: $box-shadow;
+    position: relative;
+    outline: none;
+    display: flex;
+    flex-direction: column;
+    animation-name: modalContentOpen;
+    animation-duration: 0.2s;
+    padding: 2.35em 2em;
+    // To remedy text shift during transform animation
+    transform: perspective(1px) translateZ(0);
+    backface-visibility: hidden;
+    will-change: auto;
+    overflow: auto;
+    max-height: 90vh;
+
+    &.small {
+      max-width: 500px;
+    }
+
+    &.medium {
+      max-width: 684px;
+    }
+
+    .close {
+      display: block;
+      width: 18px;
+      height: 18px;
+      text-indent: -9999px;
+      background: url(/images/controls/close.svg) no-repeat center center;
+      background-size: cover;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      cursor: pointer;
+    }
+
+    .modal-title,
+    h2 {
+      font-size: 2rem;
+      text-align: center;
+    }
+
+    hr {
+      margin-bottom: 1.5em;
+    }
+
+    .actions {
+      margin-top: 1.5em;
+
+      &.top-border {
+        border-top: solid 1px $border-color;
+        padding-top: 1.5em;
+      }
+
+      &.full-width {
+        width: calc(100% + 4em);
+        margin-left: -2em;
+        margin-bottom: -1em;
+        padding-left: 2em;
+        padding-right: 2em;
+      }
+
+      &.centered {
+        display: flex;
+        justify-content: center;
+
+        button + button {
+          margin-left: 2em;
+        }
+      }
+    }
+  }
+}
