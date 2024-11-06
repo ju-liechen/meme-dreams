@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as y from 'yup'
 
@@ -7,23 +7,34 @@ import * as y from 'yup'
 import { axiosClient } from 'util/axios-client'
 import { useStore } from 'util/store'
 import { Button } from 'components/button'
-import { Form, useForm, SubmitButton, TextInput } from 'components/form'
+import { Form, useForm, SubmitButton, SelectInput, TextInput } from 'components/form'
 import { Tooltip } from 'components/tooltip'
 
 import styles from './home.module.scss'
 
-// Example useQuery if GET request:
-// import { useQuery } from '@tanstack/react-query'
-// const getMeme = () => {
-//   return useQuery({
-//     queryKey: ['meme'],
-//     queryFn: async (data) => {
-//       const response = await axiosClient.get(`/meme?font_size=${data.fontSize}&top=${data.topText}&font=${data.font}&bottom=${data.bottomText}&meme=${data.imageName}`)
-//       return response.data
-//     },
-//     enabled: false,
-//   })
-// }
+const getFonts= () => {
+  return useQuery({
+    queryKey: ['fonts'],
+    queryFn: async () => {
+      const response = await axiosClient.get('fonts')
+      return response.data
+    },
+    staleTime: 1000 * 60 * 60, // 1 hours
+    cacheTime: 1000 * 60 * 60 * 24, // 24 hours
+  })
+}
+
+const getImages= () => {
+  return useQuery({
+    queryKey: ['images'],
+    queryFn: async () => {
+      const response = await axiosClient.get('images')
+      return response.data
+    },
+    staleTime: 1000 * 60 * 60, // 1 hours
+    cacheTime: 1000 * 60 * 60 * 24, // 24 hours
+  })
+}
 
 
 const useGenerateMeme = () => {
@@ -44,14 +55,17 @@ const formatFileName = (...args) => {
     .filter(Boolean)
     .map((str) => str.trim().replace(/\s+/g, '-'))
     .join('-')
+    .replace(/^-+|-+$/g, '');
 }
 
 const Index = () => {
   const setNotification = useStore((state) => state.setNotification)
   const { mutate: generateMeme, data: meme, isLoading: isGenerating, error } = useGenerateMeme()
-  const [fileName, setFileName] = useState('');
+  const { data: fonts, isLoading: fontsLoading, error: fontsError } = getFonts()
+  const { data: images, isLoading: imagesLoading, error: imagesError } = getImages()
+  const [fileName, setFileName] = useState('')
 
-  const methods = useForm({
+  const { setValue, handleSubmit, ...methods } = useForm({
     onSubmit: async (data) => {
       const memeData = {
         font: data.font === '' ? 'Impact' : data.font,
@@ -80,56 +94,70 @@ const Index = () => {
     },
     resolver: yupResolver(
       y.object().shape({
-        topText: y.string().required('Top text is required'),
-        bottomText: y.string(),
+        topText: y.string(),
+        bottomText: y.string().test(
+          'at-least-one',
+          'At least one of top or bottom text is required',
+          function (value) {
+            const { topText } = this.parent
+            return value?.trim() || topText?.trim()
+          }
+        ),
       })
-    ),
+    )
   })
 
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.inputs}>
-        <Form methods={methods}>
-          <TextInput
-            name="font"
-            label="Font"
-            type="text"
-            placeholder="Impact"
-          />
-          <TextInput
-            name="fontSize"
-            label="Font Size"
-            type=""
-            placeholder="50"
-          />
-          <TextInput
-              name="topText"
-              label="Top Text"
+    <div className={styles.container}>
+      <div className={styles.wrapper}>
+        <div className={styles.inputs}>
+          <Form methods={methods}>
+            <SelectInput
+              name="font"
+              label="Font"
               type="text"
-          />
-          <TextInput
-              name="bottomText"
-              label="Bottom Text"
+              placeholder="Impact"
+              options={fonts?.map((font) => ({ value: font, label: font, }))}
+              onValueChange={(value) => setValue("font", value)}
+              className={styles.select}
+            />
+            <TextInput
+              name="fontSize"
+              label="Font Size"
+              type=""
+              placeholder="50"
+            />
+            <TextInput
+                name="topText"
+                label="Top Text"
+                type="text"
+            />
+            <TextInput
+                name="bottomText"
+                label="Bottom Text"
+                type="text"
+            />
+            <SelectInput
+              name="imageName"
+              label="Image Name"
               type="text"
-          />
-          <TextInput
-            name="imageName"
-            label="Image Name"
-            type="text"
-            placeholder="Condescending-Wonka"
-          />
-          <SubmitButton>
-            Generate
-          </SubmitButton>
-        </Form>
-      </div>
-      <div className={styles.picture}>
-        {(() => {
-          if (isGenerating) return <p>Generating meme...</p>
-          if (error) return <p>Error: {error.message}</p>
-          if (meme) return <GeneratedImage base64Image={meme} altText={fileName} />
-          return <p>Some sort of animation</p> 
-        })()}
+              placeholder="Condescending-Wonka"
+              options={images?.map((image) => ({ value: image, label: image, }))}
+              onValueChange={(value) => setValue("imageName", value)}
+            />
+            <SubmitButton className={styles['submit-btn']}>
+              Generate
+            </SubmitButton>
+          </Form>
+        </div>
+        <div className={styles.picture}>
+          {(() => {
+            if (isGenerating) return <p>Generating meme...</p>
+            if (error) return <p>Error: {error.message}</p>
+            if (meme) return <GeneratedImage base64Image={meme} altText={fileName} />
+            return <p>Some sort of animation</p> 
+          })()}
+        </div>
       </div>
     </div>
   )

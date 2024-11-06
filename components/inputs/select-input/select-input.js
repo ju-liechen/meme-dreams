@@ -27,12 +27,14 @@ export const SelectInput = forwardRef(
       error,
       options = [{}],
       required,
+      onValueChange,
       ...props
     },
     ref
   ) => {
     const [contentWidth, setContentWidth] = useState(500)
     const containerRef = useRef()
+    const [isOpen, setIsOpen] = useState(false) 
 
     useEffect(() => {
       if (!containerRef?.current) return
@@ -53,6 +55,10 @@ export const SelectInput = forwardRef(
           defaultValue={defaultValue}
           name={name}
           required={required}
+          onOpenChange={(open) => setIsOpen(open)}
+          onValueChange={(value) => {
+            if (onValueChange) onValueChange(value)
+          }}
           {...props}
         >
           {label && (
@@ -63,7 +69,7 @@ export const SelectInput = forwardRef(
           <Trigger className={styles['select-trigger']} aria-label={label}>
             <Value placeholder={placeholder} />
             <div className={styles['select-arrow']}>
-              <Icon name="chevron-down" />
+              <Icon name={isOpen ? "chevron-up" : "chevron-down"} />
             </div>
           </Trigger>
           <Portal>

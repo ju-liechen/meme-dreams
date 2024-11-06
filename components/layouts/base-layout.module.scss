@@ -1,3 +1,5 @@
+@import 'styles/base/variables.scss';
+
 .base-container {
   display: flex;
   flex-flow: column nowrap;
@@ -16,5 +18,15 @@
     padding-inline: 20rem;
     flex-grow: 1;
     flex-shrink: 1;
+  }
+}
+
+
+@media #{$phone-tablet} {
+  .base-container {
+    .body {
+      padding-block: 1rem;
+      padding-inline: 2rem;
+    }
   }
 }
