@@ -1,4 +1,4 @@
-import { forwardRef, useState, useRef, useEffect } from 'react'
+import { forwardRef, useState, useRef } from 'react'
 import { Icon } from 'components/icon'
 import { ErrorMessage } from 'components/inputs/error-message'
 import { classnames } from 'util/classnames'
@@ -14,6 +14,8 @@ import {
   Item,
   ItemText,
   Portal,
+  ScrollDownButton,
+  ScrollUpButton,
 } from '@radix-ui/react-select'
 
 export const SelectInput = forwardRef(
@@ -32,16 +34,8 @@ export const SelectInput = forwardRef(
     },
     ref
   ) => {
-    const [contentWidth, setContentWidth] = useState(500)
     const containerRef = useRef()
     const [isOpen, setIsOpen] = useState(false) 
-
-    useEffect(() => {
-      if (!containerRef?.current) return
-      const refRect = containerRef.current.getBoundingClientRect()
-      const width = refRect.width
-      setContentWidth(width)
-    }, [containerRef])
 
     return (
       <div
@@ -76,15 +70,17 @@ export const SelectInput = forwardRef(
             <Content
               className={styles['select-content']}
               position="popper"
-              style={{ width: `${contentWidth}px` }}
+              style={{ width: `${containerRef.current?.offsetWidth || 0}px` }}
             >
+              <ScrollUpButton/>
               <Viewport className="select-viewport">
                 {options.map((o) => (
                   <SelectItem key={o.value} value={o.value}>
                     {o.label}
                   </SelectItem>
                 ))}
-              </Viewport>
+                </Viewport>
+              <ScrollDownButton/>
             </Content>
           </Portal>
         </Root>
