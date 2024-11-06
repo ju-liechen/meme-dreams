@@ -11,7 +11,7 @@ export const RadioButton = connectByRef(
   ({name, error, props}) =>
     ({name, error, label: Case.capital(props.value || '')})
 )
+export const SelectInput = connectByRef(Inputs.SelectInput)
 // TODO: get these other inputs working
 // export const DatePickerSelect = connectByRef(Inputs.DatePickerSelect)
-// export const SelectInput = connectByRef(Inputs.SelectInput)
 // export const FileUpload = connectByRef(Inputs.FileUpload)

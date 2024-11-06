@@ -27,6 +27,7 @@ export const SelectInput = forwardRef(
       error,
       options = [{}],
       required,
+      onValueChange,
       ...props
     },
     ref
@@ -53,6 +54,9 @@ export const SelectInput = forwardRef(
           defaultValue={defaultValue}
           name={name}
           required={required}
+          onValueChange={(value) => {
+            if (onValueChange) onValueChange(value)  // Call onValueChange if it exists
+          }}
           {...props}
         >
           {label && (

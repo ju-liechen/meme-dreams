@@ -60,7 +60,8 @@ Component - Select field
 }
 
 .select-content {
-  overflow: hidden;
+  max-height: 300px;
+  overflow-y: auto;
   background-color: $white;
   border-radius: $border-radius;
   border: solid 1px $border-color;
