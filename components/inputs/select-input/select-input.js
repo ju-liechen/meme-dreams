@@ -55,7 +55,7 @@ export const SelectInput = forwardRef(
           name={name}
           required={required}
           onValueChange={(value) => {
-            if (onValueChange) onValueChange(value)  // Call onValueChange if it exists
+            if (onValueChange) onValueChange(value)
           }}
           {...props}
         >

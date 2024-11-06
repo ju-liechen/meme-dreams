@@ -24,6 +24,19 @@ const getFonts= () => {
   })
 }
 
+const getImages= () => {
+  return useQuery({
+    queryKey: ['images'],
+    queryFn: async () => {
+      const response = await axiosClient.get('images')
+      return response.data
+    },
+    staleTime: 1000 * 60 * 60, // 1 hours
+    cacheTime: 1000 * 60 * 60 * 24, // 24 hours
+  })
+}
+
+
 const useGenerateMeme = () => {
   return useMutation({
     mutationFn: async (data) => {
@@ -49,6 +62,7 @@ const Index = () => {
   const setNotification = useStore((state) => state.setNotification)
   const { mutate: generateMeme, data: meme, isLoading: isGenerating, error } = useGenerateMeme()
   const { data: fonts, isLoading: fontsLoading, error: fontsError } = getFonts()
+  const { data: images, isLoading: imagesLoading, error: imagesError } = getImages()
   const [fileName, setFileName] = useState('')
 
   const { setValue, handleSubmit, ...methods } = useForm({
@@ -104,6 +118,7 @@ const Index = () => {
             placeholder="Impact"
             options={fonts?.map((font) => ({ value: font, label: font, }))}
             onValueChange={(value) => setValue("font", value)}
+            className={styles.select}
           />
           <TextInput
             name="fontSize"
@@ -121,11 +136,13 @@ const Index = () => {
               label="Bottom Text"
               type="text"
           />
-          <TextInput
+          <SelectInput
             name="imageName"
             label="Image Name"
             type="text"
             placeholder="Condescending-Wonka"
+            options={images?.map((image) => ({ value: image, label: image, }))}
+            onValueChange={(value) => setValue("imageName", value)}
           />
           <SubmitButton>
             Generate
