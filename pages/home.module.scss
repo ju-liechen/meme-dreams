@@ -20,6 +20,36 @@
   .inputs, .picture {
     flex: 1;
     padding: 16px;
+
+    .actions {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 16px;
+
+      .upload-txt {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 5px;
+
+        .upload {
+          padding: 0;
+
+          span {
+            font-size: 16px;
+            color: $brand-color-2;
+            transition: color 0.3s ease-in-out;
+
+            &:hover {
+              color: $brand-color-3;
+              transition: color 0.3s ease-in-out;
+            }
+          }
+        }
+      }
+    }
   }
 
   .picture {

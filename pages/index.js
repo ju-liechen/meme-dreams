@@ -60,6 +60,7 @@ const formatFileName = (...args) => {
 
 const Index = () => {
   const setNotification = useStore((state) => state.setNotification)
+  const setModal = useStore((state) => state.setModal)
   const { mutate: generateMeme, data: meme, isLoading: isGenerating, error } = useGenerateMeme()
   const { data: fonts, isLoading: fontsLoading, error: fontsError } = getFonts()
   const { data: images, isLoading: imagesLoading, error: imagesError } = getImages()
@@ -145,9 +146,21 @@ const Index = () => {
               options={images?.map((image) => ({ value: image, label: image, }))}
               onValueChange={(value) => setValue("imageName", value)}
             />
-            <SubmitButton className={styles['submit-btn']}>
-              Generate
-            </SubmitButton>
+            <div className={styles.actions}>
+              <SubmitButton className={styles['submit-btn']}>
+                Generate
+              </SubmitButton>
+              <div className={styles['upload-txt']}>
+                Need more options?
+                <Button
+                  variation="text"
+                  className={styles.upload}
+                  onClick={() => setModal('UploadImage')}
+                >
+                  Upload your own image
+                </Button>
+              </div>
+            </div>
           </Form>
         </div>
         <div className={styles.picture}>
