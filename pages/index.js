@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as y from 'yup'
 
@@ -7,10 +7,22 @@ import * as y from 'yup'
 import { axiosClient } from 'util/axios-client'
 import { useStore } from 'util/store'
 import { Button } from 'components/button'
-import { Form, useForm, SubmitButton, TextInput } from 'components/form'
+import { Form, useForm, SubmitButton, SelectInput, TextInput } from 'components/form'
 import { Tooltip } from 'components/tooltip'
 
 import styles from './home.module.scss'
+
+const getFonts= () => {
+  return useQuery({
+    queryKey: ['fonts'],
+    queryFn: async () => {
+      const response = await axiosClient.get('fonts')
+      return response.data
+    },
+    staleTime: 1000 * 60 * 60, // 1 hours
+    cacheTime: 1000 * 60 * 60 * 24, // 24 hours
+  })
+}
 
 const useGenerateMeme = () => {
   return useMutation({
@@ -36,9 +48,10 @@ const formatFileName = (...args) => {
 const Index = () => {
   const setNotification = useStore((state) => state.setNotification)
   const { mutate: generateMeme, data: meme, isLoading: isGenerating, error } = useGenerateMeme()
+  const { data: fonts, isLoading: fontsLoading, error: fontsError } = getFonts()
   const [fileName, setFileName] = useState('')
 
-  const methods = useForm({
+  const { setValue, handleSubmit, ...methods } = useForm({
     onSubmit: async (data) => {
       const memeData = {
         font: data.font === '' ? 'Impact' : data.font,
@@ -84,11 +97,13 @@ const Index = () => {
     <div className={styles.wrapper}>
       <div className={styles.inputs}>
         <Form methods={methods}>
-          <TextInput
+          <SelectInput
             name="font"
             label="Font"
             type="text"
             placeholder="Impact"
+            options={fonts?.map((font) => ({ value: font, label: font, }))}
+            onValueChange={(value) => setValue("font", value)}
           />
           <TextInput
             name="fontSize"
