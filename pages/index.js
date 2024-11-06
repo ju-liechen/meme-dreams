@@ -12,20 +12,6 @@ import { Tooltip } from 'components/tooltip'
 
 import styles from './home.module.scss'
 
-// Example useQuery if GET request:
-// import { useQuery } from '@tanstack/react-query'
-// const getMeme = () => {
-//   return useQuery({
-//     queryKey: ['meme'],
-//     queryFn: async (data) => {
-//       const response = await axiosClient.get(`/meme?font_size=${data.fontSize}&top=${data.topText}&font=${data.font}&bottom=${data.bottomText}&meme=${data.imageName}`)
-//       return response.data
-//     },
-//     enabled: false,
-//   })
-// }
-
-
 const useGenerateMeme = () => {
   return useMutation({
     mutationFn: async (data) => {
@@ -44,12 +30,13 @@ const formatFileName = (...args) => {
     .filter(Boolean)
     .map((str) => str.trim().replace(/\s+/g, '-'))
     .join('-')
+    .replace(/^-+|-+$/g, '');
 }
 
 const Index = () => {
   const setNotification = useStore((state) => state.setNotification)
   const { mutate: generateMeme, data: meme, isLoading: isGenerating, error } = useGenerateMeme()
-  const [fileName, setFileName] = useState('');
+  const [fileName, setFileName] = useState('')
 
   const methods = useForm({
     onSubmit: async (data) => {
@@ -80,10 +67,17 @@ const Index = () => {
     },
     resolver: yupResolver(
       y.object().shape({
-        topText: y.string().required('Top text is required'),
-        bottomText: y.string(),
+        topText: y.string(),
+        bottomText: y.string().test(
+          'at-least-one',
+          'At least one of top or bottom text is required',
+          function (value) {
+            const { topText } = this.parent
+            return value?.trim() || topText?.trim()
+          }
+        ),
       })
-    ),
+    )
   })
 
   return (
