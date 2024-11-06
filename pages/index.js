@@ -108,54 +108,56 @@ const Index = () => {
   })
 
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.inputs}>
-        <Form methods={methods}>
-          <SelectInput
-            name="font"
-            label="Font"
-            type="text"
-            placeholder="Impact"
-            options={fonts?.map((font) => ({ value: font, label: font, }))}
-            onValueChange={(value) => setValue("font", value)}
-            className={styles.select}
-          />
-          <TextInput
-            name="fontSize"
-            label="Font Size"
-            type=""
-            placeholder="50"
-          />
-          <TextInput
-              name="topText"
-              label="Top Text"
+    <div className={styles.container}>
+      <div className={styles.wrapper}>
+        <div className={styles.inputs}>
+          <Form methods={methods}>
+            <SelectInput
+              name="font"
+              label="Font"
               type="text"
-          />
-          <TextInput
-              name="bottomText"
-              label="Bottom Text"
+              placeholder="Impact"
+              options={fonts?.map((font) => ({ value: font, label: font, }))}
+              onValueChange={(value) => setValue("font", value)}
+              className={styles.select}
+            />
+            <TextInput
+              name="fontSize"
+              label="Font Size"
+              type=""
+              placeholder="50"
+            />
+            <TextInput
+                name="topText"
+                label="Top Text"
+                type="text"
+            />
+            <TextInput
+                name="bottomText"
+                label="Bottom Text"
+                type="text"
+            />
+            <SelectInput
+              name="imageName"
+              label="Image Name"
               type="text"
-          />
-          <SelectInput
-            name="imageName"
-            label="Image Name"
-            type="text"
-            placeholder="Condescending-Wonka"
-            options={images?.map((image) => ({ value: image, label: image, }))}
-            onValueChange={(value) => setValue("imageName", value)}
-          />
-          <SubmitButton>
-            Generate
-          </SubmitButton>
-        </Form>
-      </div>
-      <div className={styles.picture}>
-        {(() => {
-          if (isGenerating) return <p>Generating meme...</p>
-          if (error) return <p>Error: {error.message}</p>
-          if (meme) return <GeneratedImage base64Image={meme} altText={fileName} />
-          return <p>Some sort of animation</p> 
-        })()}
+              placeholder="Condescending-Wonka"
+              options={images?.map((image) => ({ value: image, label: image, }))}
+              onValueChange={(value) => setValue("imageName", value)}
+            />
+            <SubmitButton className={styles['submit-btn']}>
+              Generate
+            </SubmitButton>
+          </Form>
+        </div>
+        <div className={styles.picture}>
+          {(() => {
+            if (isGenerating) return <p>Generating meme...</p>
+            if (error) return <p>Error: {error.message}</p>
+            if (meme) return <GeneratedImage base64Image={meme} altText={fileName} />
+            return <p>Some sort of animation</p> 
+          })()}
+        </div>
       </div>
     </div>
   )
